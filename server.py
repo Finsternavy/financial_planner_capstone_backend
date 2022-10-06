@@ -12,16 +12,16 @@ import datetime
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-app = Flask(__name__)
+app = Flask("Financial_Planner_React", static_folder='Financial_planner_frontend/build', static_url_path='')
 CORS(app)
 
 @app.route("/")
 @cross_origin()
 def serve():
-    return 'This page is intentionally empty'
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.post("/register")
-@cross_origin()
+
 def save_user():
     try:
         user = request.get_json()
@@ -52,14 +52,13 @@ def save_user():
     except Exception as e:
         return Response(f"Unexpected error: {e}", status=500)
 
-@app.post("/user")
-@cross_origin()
-def get_user():
+@app.post("/user/<user_name>")
+def get_user(user_name):
     print("this works")
     try:
         data = request.get_json()
         print(data)
-        user = database.users.find_one({"user_name": data['user_name']})
+        user = database.users.find_one({"user_name": user_name})
         returnData = []
     
         if not user:
@@ -683,4 +682,4 @@ def optimize_budget():
         responseData.append('Budget optimization complete!')
         return json.dumps(responseData)
 
-# app.run(debug=True)
+app.run(debug=True)
