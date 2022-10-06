@@ -12,7 +12,7 @@ import datetime
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-app = Flask("Financial_Planner_React", static_folder='Financial_planner_frontend/build', static_url_path='')
+app = Flask(__name__)
 CORS(app)
 
 @app.route("/")
