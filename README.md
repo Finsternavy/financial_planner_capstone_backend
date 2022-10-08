@@ -40,8 +40,13 @@ pip install sendgrid
 
 ### This backend has the following working functionality:
 -User registration
+
 -User login
+
 -Account recovery email (username / password)
+
 -Loan detail calculations (monthly payments, interest and principle breakdowns, period to payoff)
+
 -Budget CRUD
+
 -Debt Snowball calculations
